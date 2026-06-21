@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Weather Dashboard</h1>
+
+        <div class="top-row">
+
+            <div class="card">
+                <h2>Get Weather</h2>
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Enter location"
+                    oninput="searchLocation()"
+                >
+
+                <div id="suggestions"></div>
+
+                <input
+                    type="date"
+                    id="startDate"
+                >
+
+                <input
+                    type="date"
+                    id="endDate"
+                >
+
+                <button
+                    id="weatherButton"
+                    onclick="getWeather()"
+                >
+                    Get Weather
+                </button>
+
+                <p id="editStatus"></p>
+            </div>
+
+            <div
+                id="weatherResult"
+                class="card"
+            >
+            </div>
+
+        </div>
+
+        <div class="card">
+            <h2>Saved Records</h2>
+
+            <button onclick="loadRecords()">
+                Refresh Records
+            </button>
+
+            <div id="records"></div>
+        </div>
+
+        <div
+            id="recordDetails"
+            class="card"
+            style="display:none"
+        >
+        </div>
+
+        <div class="card">
+            <h2>Export Data</h2>
+
+            <button onclick="exportJson()">
+                Export JSON
+            </button>
+
+            <button onclick="exportCsv()">
+                Export CSV
+            </button>
+        </div>
+
+    </div>
+
+    <script src="/static/app.js"></script>
+
+</body>
+</html>
