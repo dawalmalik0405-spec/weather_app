@@ -31,24 +31,27 @@ A small full-stack weather application built with FastAPI, SQLite, and vanilla J
 ```text
 hackathon/
 |-- backend/
-|   |-- main.py                       # FastAPI setup and static UI hosting
-|   |-- database.py                   # SQLite engine and DB sessions
-|   |-- models.py                     # Weather and forecast tables
+|   |-- main.py                  # FastAPI setup and static UI hosting
+|   |-- database.py              # SQLite engine and DB sessions
+|   |-- models.py                # Weather and forecast tables
+|   |
 |   |-- routes/
-|   |   |-- weather.py                # CRUD, search, and export endpoints
-|   |   |-- weater.py                 # WeatherCreate request schema
-|   |   `-- export.py                 # Currently unused placeholder
+|   |   |-- weather.py           # CRUD, search, export endpoints
+|   |   `-- weater.py            # WeatherCreate request schema
+|   |
 |   |-- services/
-|   |   |-- geocoding_service.py      # Place lookup and suggestions
-|   |   |-- weather_service.py        # Current weather and forecast lookup
-|   |   `-- validation_service.py     # Date-range validation
+|   |   |-- geocoding_service.py # Place lookup and suggestions
+|   |   |-- weather_service.py   # Current weather and forecast lookup
+|   |   `-- validation_service.py # Date-range validation
+|   |
 |   `-- static/
-|       |-- index.html                # Dashboard markup
-|       |-- app.js                    # UI behavior and API calls
-|       `-- style.css                 # Dashboard styling
-|-- LICENSE
-|-- requirements.txt                  # Pinned Python dependencies
-`-- README.md
+|       |-- index.html           # Dashboard UI
+|       |-- app.js               # Frontend logic and API calls
+|       `-- style.css            # Styling
+|
+|-- requirements.txt            # Project dependencies
+|-- README.md
+`-- LICENSE
 ```
 
 ## How it works
@@ -171,6 +174,19 @@ If the app does not start, confirm that:
 - Port `8000` is not already being used by another process.
 - Internet access is available for live weather, location search, and map resources.
 
+
+
+## Demo Features
+
+- Search locations with autocomplete
+- View current weather conditions
+- Display forecast for selected dates
+- Interactive map visualization
+- Save weather searches
+- Edit existing searches
+- Delete records
+- Export data as JSON and CSV
+
 ## Configuration and generated files
 
 The application does not currently use environment variables and does not require an API key.
@@ -197,6 +213,16 @@ All application endpoints use the `/weather` prefix.
 | `DELETE` | `/weather/{id}` | Delete a record and its forecasts |
 | `GET` | `/weather/export/json` | Download all records as JSON |
 | `GET` | `/weather/export/csv` | Download forecast rows as CSV |
+
+
+
+## CRUD Operations
+
+- Create weather records
+- Read saved records
+- Update existing records
+- Delete records
+
 
 ### Create a weather record
 
@@ -301,6 +327,49 @@ Stores forecast date, maximum temperature, minimum temperature, and condition. E
 - The frontend uses same-origin relative URLs, so it is served by the same FastAPI process as the API.
 - API behavior can be explored without the dashboard through Swagger UI at `/docs`.
 - If the database schema changes during development, introduce migrations (for example, Alembic) rather than relying on `create_all` for existing databases.
+
+
+## Assessment Requirements Covered
+
+✅ Weather API Integration
+
+✅ Geocoding API Integration
+
+✅ CRUD Operations
+
+✅ SQLite Database Storage
+
+✅ Export to JSON
+
+✅ Export to CSV
+
+✅ Interactive Frontend
+
+✅ Location Autocomplete
+
+✅ Map Visualization
+
+✅ Error Handling
+
+
+
+
+## Requirements
+
+- Python 3.10+
+- FastAPI
+- SQLAlchemy
+- Uvicorn
+- Requests
+- SQLite
+
+
+
+
+
+
+
+
 
 ## License
 
