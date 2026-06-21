@@ -62,35 +62,114 @@ hackathon/
 ## Prerequisites
 
 - Python 3.10 or newer
+- Git (when installing by cloning the repository)
 - Internet access at runtime for Open-Meteo, Leaflet, and OpenStreetMap
 
 Python runtime dependencies are pinned in `requirements.txt` for reproducible installation.
 
-## Local setup
+## Installation
 
-Run these commands from PowerShell:
+### 1. Clone the repository
 
 ```powershell
-cd D:\practice\hackathon\backend
+git clone https://github.com/dawalmalik0405-spec/weather_app.git
+cd weather_app
+```
 
+If the project is already downloaded, open PowerShell in the project root—the directory containing `README.md`, `requirements.txt`, and `backend`.
+
+### 2. Create a virtual environment
+
+```powershell
 python -m venv .venv
+```
+
+### 3. Activate the virtual environment
+
+```powershell
 .\.venv\Scripts\Activate.ps1
+```
 
+If PowerShell blocks script execution, allow local scripts for your user and then activate the environment again:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+.\.venv\Scripts\Activate.ps1
+```
+
+### 4. Install dependencies
+
+```powershell
 python -m pip install --upgrade pip
-python -m pip install -r ..\requirements.txt
+python -m pip install -r requirements.txt
+```
 
+## Running the application
+
+The server must be started from the `backend` directory because the application currently uses relative import, static-file, database, and export paths.
+
+```powershell
+cd backend
 python -m uvicorn main:app --reload
 ```
 
-Open:
+After Uvicorn reports that the application has started, open the dashboard at:
 
-- Dashboard: <http://localhost:8000>
-- Swagger UI: <http://localhost:8000/docs>
-- ReDoc: <http://localhost:8000/redoc>
+<http://localhost:8000>
 
-Run Uvicorn from the `backend` directory. The current imports, static directory, SQLite file, and export paths are relative to that working directory.
+The same server hosts both the browser frontend and the API; no separate frontend command is required.
 
-To stop the server, press `Ctrl+C`. To leave the virtual environment, run `deactivate`.
+### Available URLs
+
+| Page | URL |
+| --- | --- |
+| Weather dashboard | <http://localhost:8000> |
+| Swagger API documentation | <http://localhost:8000/docs> |
+| ReDoc API documentation | <http://localhost:8000/redoc> |
+
+### Stop or restart the server
+
+- Press `Ctrl+C` in the server terminal to stop it.
+- Run `python -m uvicorn main:app --reload` again to restart it.
+- Run `deactivate` when you are finished with the virtual environment.
+
+### Run the project again later
+
+For subsequent runs, dependencies do not need to be reinstalled. From the project root, run:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+cd backend
+python -m uvicorn main:app --reload
+```
+
+### Linux or macOS
+
+The equivalent environment activation and startup commands are:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+cd backend
+python -m uvicorn main:app --reload
+```
+
+### Verify the installation
+
+With the server running, this PowerShell command should return saved records as JSON (an empty list on a new installation):
+
+```powershell
+Invoke-RestMethod -Uri "http://localhost:8000/weather/"
+```
+
+If the app does not start, confirm that:
+
+- The virtual environment is active.
+- Dependencies were installed from the root `requirements.txt`.
+- The Uvicorn command is being run inside `backend`.
+- Port `8000` is not already being used by another process.
+- Internet access is available for live weather, location search, and map resources.
 
 ## Configuration and generated files
 
